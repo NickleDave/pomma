@@ -1,6 +1,4 @@
-from functools import reduce
-from operator import iadd  # aka the += operator
-from itertools import groupby
+from itertools import groupby, chain
 
 
 def determine_symbols_and_max_repeats(sequences):
@@ -43,8 +41,8 @@ def determine_symbols_and_max_repeats(sequences):
         raise TypeError('sequences should be a list, not {}'.format(type(sequences)))
     if not all([type(seq) == list for seq in sequences]):
         raise TypeError('sequences should be a list of lists')
-    # "reduce(iadd, sequences)" concatenates sequences, a list of lists
-    seqs_concat = reduce(iadd, sequences)
+    # chain.from_iterable concatenates sequences
+    seqs_concat = list(chain.from_iterable(sequences))
     # map unique set of symbols to consecutive integers starting from 0
     symbols = set(seqs_concat)
     symbols_int_map = dict(zip(symbols,
@@ -55,7 +53,6 @@ def determine_symbols_and_max_repeats(sequences):
         seq_mapped = [symbols_int_map[symbol]
                       for symbol in seq]
         seqs_mapped.append(seq_mapped)
-    seqs_mapped = seqs_mapped
 
     # find maximum number of consecutive repeats for each symbol
     repeat_counts = []
