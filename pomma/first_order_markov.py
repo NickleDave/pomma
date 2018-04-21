@@ -1,8 +1,5 @@
 # code to create first-order Markov models of song syntax and generate output from models
 
-import os
-from glob import glob
-import re
 from collections import defaultdict
 
 import numpy as np
