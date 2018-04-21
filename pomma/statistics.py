@@ -1,5 +1,10 @@
 # module to calculate descriptive statistics of label sequences
 
+import re
+from collections import defaultdict
+
+import numpy as np
+
 
 def get_repeat_distribs(sequences, labels):
     """gets distribution of repeats from a list of sequences,
